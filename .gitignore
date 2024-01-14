@@ -1,0 +1,6 @@
+.DS_Store
+.AppleDouble
+build/
+DerivedData/
+!*.xcodeproj/xcuserdata/
+/project.xcworkspace/xcshareddata/swiftpm/Package.resolved

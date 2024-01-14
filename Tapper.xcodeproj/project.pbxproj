@@ -8,13 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		49270E262B48BC5B008A8E3F /* TapperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49270E252B48BC5B008A8E3F /* TapperApp.swift */; };
-		49270E282B48BC5B008A8E3F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49270E272B48BC5B008A8E3F /* ContentView.swift */; };
-		49270E2A2B48BC5B008A8E3F /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49270E292B48BC5B008A8E3F /* Item.swift */; };
+		49270E282B48BC5B008A8E3F /* TapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49270E272B48BC5B008A8E3F /* TapperView.swift */; };
+		49270E2A2B48BC5B008A8E3F /* Tapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49270E292B48BC5B008A8E3F /* Tapper.swift */; };
 		49270E2C2B48BC5D008A8E3F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49270E2B2B48BC5D008A8E3F /* Assets.xcassets */; };
 		49270E2F2B48BC5D008A8E3F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49270E2E2B48BC5D008A8E3F /* Preview Assets.xcassets */; };
 		49270E3B2B48BC5D008A8E3F /* TapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49270E3A2B48BC5D008A8E3F /* TapperTests.swift */; };
 		49270E452B48BC5D008A8E3F /* TapperUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49270E442B48BC5D008A8E3F /* TapperUITests.swift */; };
 		49270E472B48BC5D008A8E3F /* TapperUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49270E462B48BC5D008A8E3F /* TapperUITestsLaunchTests.swift */; };
+		49270E562B48C494008A8E3F /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49270E532B48C494008A8E3F /* Spacing.swift */; };
+		49270E572B48C494008A8E3F /* Borders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49270E542B48C494008A8E3F /* Borders.swift */; };
+		49270E582B48C494008A8E3F /* IconSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49270E552B48C494008A8E3F /* IconSize.swift */; };
+		49270E5C2B48D73B008A8E3F /* ColorKit in Frameworks */ = {isa = PBXBuildFile; productRef = 49270E5B2B48D73B008A8E3F /* ColorKit */; };
+		49270E5E2B49CA2C008A8E3F /* TappersListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49270E5D2B49CA2C008A8E3F /* TappersListView.swift */; };
+		49270E602B4A2BF2008A8E3F /* EditTapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49270E5F2B4A2BF2008A8E3F /* EditTapperView.swift */; };
+		49270E6D2B4C799F008A8E3F /* TapperNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49270E6C2B4C799F008A8E3F /* TapperNavigationView.swift */; };
+		49270E6F2B4CD7AF008A8E3F /* TappersListView+SmallTapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49270E6E2B4CD7AF008A8E3F /* TappersListView+SmallTapperView.swift */; };
+		49270E722B4CD823008A8E3F /* TappersListView+PreviewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49270E712B4CD823008A8E3F /* TappersListView+PreviewContainer.swift */; };
+		49270E742B50D3DA008A8E3F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49270E732B50D3DA008A8E3F /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,8 +47,8 @@
 /* Begin PBXFileReference section */
 		49270E222B48BC5B008A8E3F /* Tapper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tapper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49270E252B48BC5B008A8E3F /* TapperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapperApp.swift; sourceTree = "<group>"; };
-		49270E272B48BC5B008A8E3F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		49270E292B48BC5B008A8E3F /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		49270E272B48BC5B008A8E3F /* TapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapperView.swift; sourceTree = "<group>"; };
+		49270E292B48BC5B008A8E3F /* Tapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tapper.swift; sourceTree = "<group>"; };
 		49270E2B2B48BC5D008A8E3F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49270E2E2B48BC5D008A8E3F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		49270E302B48BC5D008A8E3F /* Tapper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tapper.entitlements; sourceTree = "<group>"; };
@@ -48,6 +58,15 @@
 		49270E402B48BC5D008A8E3F /* TapperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TapperUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		49270E442B48BC5D008A8E3F /* TapperUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapperUITests.swift; sourceTree = "<group>"; };
 		49270E462B48BC5D008A8E3F /* TapperUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapperUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		49270E532B48C494008A8E3F /* Spacing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
+		49270E542B48C494008A8E3F /* Borders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Borders.swift; sourceTree = "<group>"; };
+		49270E552B48C494008A8E3F /* IconSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconSize.swift; sourceTree = "<group>"; };
+		49270E5D2B49CA2C008A8E3F /* TappersListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TappersListView.swift; sourceTree = "<group>"; };
+		49270E5F2B4A2BF2008A8E3F /* EditTapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTapperView.swift; sourceTree = "<group>"; };
+		49270E6C2B4C799F008A8E3F /* TapperNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapperNavigationView.swift; sourceTree = "<group>"; };
+		49270E6E2B4CD7AF008A8E3F /* TappersListView+SmallTapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TappersListView+SmallTapperView.swift"; sourceTree = "<group>"; };
+		49270E712B4CD823008A8E3F /* TappersListView+PreviewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TappersListView+PreviewContainer.swift"; sourceTree = "<group>"; };
+		49270E732B50D3DA008A8E3F /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49270E5C2B48D73B008A8E3F /* ColorKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,10 +119,13 @@
 			isa = PBXGroup;
 			children = (
 				49270E252B48BC5B008A8E3F /* TapperApp.swift */,
-				49270E272B48BC5B008A8E3F /* ContentView.swift */,
-				49270E292B48BC5B008A8E3F /* Item.swift */,
+				49270E6C2B4C799F008A8E3F /* TapperNavigationView.swift */,
+				49270E292B48BC5B008A8E3F /* Tapper.swift */,
+				49270E592B48C498008A8E3F /* Utilities */,
+				49270E672B4C7813008A8E3F /* Features */,
 				49270E2B2B48BC5D008A8E3F /* Assets.xcassets */,
 				49270E302B48BC5D008A8E3F /* Tapper.entitlements */,
+				49270E732B50D3DA008A8E3F /* LaunchScreen.storyboard */,
 				49270E312B48BC5D008A8E3F /* Info.plist */,
 				49270E2D2B48BC5D008A8E3F /* Preview Content */,
 			);
@@ -134,6 +157,52 @@
 			path = TapperUITests;
 			sourceTree = "<group>";
 		};
+		49270E592B48C498008A8E3F /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				49270E542B48C494008A8E3F /* Borders.swift */,
+				49270E552B48C494008A8E3F /* IconSize.swift */,
+				49270E532B48C494008A8E3F /* Spacing.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		49270E672B4C7813008A8E3F /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				49270E682B4C781C008A8E3F /* TappersListView */,
+				49270E6A2B4C7833008A8E3F /* TapperView */,
+				49270E692B4C7825008A8E3F /* EditTapperView */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		49270E682B4C781C008A8E3F /* TappersListView */ = {
+			isa = PBXGroup;
+			children = (
+				49270E5D2B49CA2C008A8E3F /* TappersListView.swift */,
+				49270E6E2B4CD7AF008A8E3F /* TappersListView+SmallTapperView.swift */,
+				49270E712B4CD823008A8E3F /* TappersListView+PreviewContainer.swift */,
+			);
+			path = TappersListView;
+			sourceTree = "<group>";
+		};
+		49270E692B4C7825008A8E3F /* EditTapperView */ = {
+			isa = PBXGroup;
+			children = (
+				49270E5F2B4A2BF2008A8E3F /* EditTapperView.swift */,
+			);
+			path = EditTapperView;
+			sourceTree = "<group>";
+		};
+		49270E6A2B4C7833008A8E3F /* TapperView */ = {
+			isa = PBXGroup;
+			children = (
+				49270E272B48BC5B008A8E3F /* TapperView.swift */,
+			);
+			path = TapperView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -150,6 +219,9 @@
 			dependencies = (
 			);
 			name = Tapper;
+			packageProductDependencies = (
+				49270E5B2B48D73B008A8E3F /* ColorKit */,
+			);
 			productName = Tapper;
 			productReference = 49270E222B48BC5B008A8E3F /* Tapper.app */;
 			productType = "com.apple.product-type.application";
@@ -222,6 +294,9 @@
 				Base,
 			);
 			mainGroup = 49270E192B48BC5B008A8E3F;
+			packageReferences = (
+				49270E5A2B48D73B008A8E3F /* XCRemoteSwiftPackageReference "ColorKit" */,
+			);
 			productRefGroup = 49270E232B48BC5B008A8E3F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -238,6 +313,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49270E742B50D3DA008A8E3F /* LaunchScreen.storyboard in Resources */,
 				49270E2F2B48BC5D008A8E3F /* Preview Assets.xcassets in Resources */,
 				49270E2C2B48BC5D008A8E3F /* Assets.xcassets in Resources */,
 			);
@@ -264,9 +340,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49270E282B48BC5B008A8E3F /* ContentView.swift in Sources */,
-				49270E2A2B48BC5B008A8E3F /* Item.swift in Sources */,
+				49270E282B48BC5B008A8E3F /* TapperView.swift in Sources */,
+				49270E6F2B4CD7AF008A8E3F /* TappersListView+SmallTapperView.swift in Sources */,
+				49270E562B48C494008A8E3F /* Spacing.swift in Sources */,
+				49270E6D2B4C799F008A8E3F /* TapperNavigationView.swift in Sources */,
+				49270E2A2B48BC5B008A8E3F /* Tapper.swift in Sources */,
+				49270E582B48C494008A8E3F /* IconSize.swift in Sources */,
+				49270E602B4A2BF2008A8E3F /* EditTapperView.swift in Sources */,
+				49270E572B48C494008A8E3F /* Borders.swift in Sources */,
+				49270E5E2B49CA2C008A8E3F /* TappersListView.swift in Sources */,
 				49270E262B48BC5B008A8E3F /* TapperApp.swift in Sources */,
+				49270E722B4CD823008A8E3F /* TappersListView+PreviewContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,11 +519,14 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Tapper/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -466,11 +553,14 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Tapper/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -600,6 +690,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		49270E5A2B48D73B008A8E3F /* XCRemoteSwiftPackageReference "ColorKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Boris-Em/ColorKit.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		49270E5B2B48D73B008A8E3F /* ColorKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 49270E5A2B48D73B008A8E3F /* XCRemoteSwiftPackageReference "ColorKit" */;
+			productName = ColorKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 49270E1A2B48BC5B008A8E3F /* Project object */;
 }
