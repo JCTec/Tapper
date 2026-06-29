@@ -14,8 +14,9 @@ struct TapperApp: App {
     let schema = Schema([
       Tapper.self,
     ])
+    let isRunningUITests = ProcessInfo.processInfo.arguments.contains("-UITesting")
     
-    let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+    let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: isRunningUITests)
     
     do {
       return try ModelContainer(for: schema, configurations: [modelConfiguration])

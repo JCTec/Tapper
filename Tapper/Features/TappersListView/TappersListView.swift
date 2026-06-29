@@ -2,15 +2,15 @@ import SwiftUI
 import SwiftData
 
 struct TappersListView: View {
-  static let squareHeight: CGFloat = 175.0
+  static let cardMinimumWidth: CGFloat = 160.0
+  static let cardOpenTapAreaHeight: CGFloat = 112.0
   static let layout = [
-    GridItem(.fixed(Self.squareHeight)),
-    GridItem(.fixed(Self.squareHeight))
+    GridItem(.adaptive(minimum: Self.cardMinimumWidth), spacing: .spacing.medium)
   ]
   
   @Environment(\.modelContext) var modelContext
   @Binding var path: NavigationPath
-  @Query var tappers: [Tapper]
+  @Query(sort: \Tapper.name) var tappers: [Tapper]
   
   var titleView: some View {
     HStack(alignment: .center, spacing: .zero) {
@@ -26,23 +26,51 @@ struct TappersListView: View {
         Image(systemName: "plus")
           .font(.title3)
       })
+      .accessibilityLabel("Add Tapper")
+      .accessibilityIdentifier("addTapperButton")
     }.padding(.horizontal, .spacing.large)
   }
   
   var contentView: some View {
-    ScrollView(.vertical) {
-      LazyVGrid(columns: Self.layout, spacing: .zero) {
-        ForEach(self.tappers) { tapper in
-          Button(action: {
-            self.path.append(tapper)
-          }, label: {
-            SmallTapperView(
-              tapper: tapper
-            )
-          })
+    Group {
+      if self.tappers.isEmpty {
+        ContentUnavailableView(
+          "No Tappers",
+          systemImage: "hand.tap",
+          description: Text("Create your first tapper to start counting.")
+        )
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .accessibilityIdentifier("emptyTappersView")
+      } else {
+        ScrollView(.vertical) {
+          LazyVGrid(columns: Self.layout, spacing: .spacing.medium) {
+            ForEach(self.tappers) { tapper in
+              ZStack(alignment: .top) {
+                SmallTapperView(
+                  tapper: tapper
+                )
+
+                Button(action: {
+                  self.path.append(TapperCoordinator.viewTapper(tapper))
+                }, label: {
+                  Color.clear
+                    .frame(maxWidth: .infinity)
+                    .frame(height: Self.cardOpenTapAreaHeight)
+                    .contentShape(Rectangle())
+                })
+                .buttonStyle(.plain)
+                .accessibilityLabel(tapper.name)
+                .accessibilityValue("\(tapper.counterValue)")
+                .accessibilityIdentifier("openTapper-\(tapper.name)")
+              }
+            }
+          }
+          .padding(.horizontal, .spacing.medium)
+          .padding(.bottom, .spacing.large)
         }
+        .scrollBounceBehavior(.basedOnSize)
       }
-    }.scrollBounceBehavior(.basedOnSize)
+    }
   }
   
   var body: some View {
@@ -80,4 +108,3 @@ struct _TappersListViewPreview: View {
     return Text("iOS 17 Only Preview")
   }
 }
-

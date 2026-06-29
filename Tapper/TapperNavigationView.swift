@@ -3,6 +3,7 @@ import SwiftUI
 enum TapperCoordinator: Hashable {
   case createTapper
   case editTapper(Tapper)
+  case viewTapper(Tapper)
 }
 
 struct TapperNavigationView: View {
@@ -19,11 +20,10 @@ struct TapperNavigationView: View {
             case .editTapper(let tapper):
               EditTapperView(path: self.$path, viewModel: .init(tapper: tapper, isEditing: true))
                 .navigationBarTitle("Edit Tapper")
+            case .viewTapper(let tapper):
+              TapperView(path: self.$path, tapper: tapper)
+                .navigationBarBackButtonHidden(true)
           }
-        }
-        .navigationDestination(for: Tapper.self) { tapper in
-          TapperView(path: self.$path, tapper: tapper)
-            .navigationBarBackButtonHidden(true)
         }
     }
   }

@@ -4,15 +4,23 @@ import SwiftData
 
 @Model
 final class Tapper {
+  static let defaultBackgroundColorHex = "ffffff"
+  static let defaultIncrement = 1
+
   var id: UUID = UUID()
   var name: String = ""
-  var sumatory: Int = 1
+  var sumatory: Int = Tapper.defaultIncrement
   var allowsNegativeValue: Bool = false
-  var backgroundColorHex: String = "ffffff"
+  var backgroundColorHex: String = Tapper.defaultBackgroundColorHex
   var counterValue: Int = 0
     
   @Transient var backgroundUIColor: UIColor? {
-    return UIColor(hex: self.backgroundColorHex)
+    return UIColor(hex: self.backgroundColorHex) ?? UIColor(hex: Self.defaultBackgroundColorHex)
+  }
+
+  @Transient var canReduceValue: Bool {
+    guard self.sumatory > 0 else { return false }
+    return self.allowsNegativeValue || (self.counterValue - self.sumatory) >= 0
   }
   
   @Transient var textColor: Color {
@@ -28,7 +36,7 @@ final class Tapper {
   }
   
   @Transient var backgroundColor: Color {
-    guard let backgroundUIColor = self.backgroundUIColor else { return .pink }
+    guard let backgroundUIColor = self.backgroundUIColor else { return .snowWhite }
     return Color(uiColor: backgroundUIColor)
   }
 
@@ -51,24 +59,25 @@ final class Tapper {
   init() {
     self.id = UUID()
     self.name = ""
-    self.sumatory = 1
+    self.sumatory = Self.defaultIncrement
     self.allowsNegativeValue = false
-    self.backgroundColorHex = ""
+    self.backgroundColorHex = Self.defaultBackgroundColorHex
     self.counterValue = 0
   }
   
   func augmentValue() {
+    guard self.sumatory > 0 else { return }
     self.counterValue += self.sumatory
   }
   
   func reduceValue() {
-    if (self.counterValue - self.sumatory) < 0 {
-      guard self.allowsNegativeValue else {
-        return
-      }
-    }
+    guard self.canReduceValue else { return }
     
     self.counterValue -= self.sumatory
+  }
+
+  func resetValue() {
+    self.counterValue = 0
   }
 }
 
