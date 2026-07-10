@@ -2,5 +2,6 @@
 .AppleDouble
 build/
 DerivedData/
-!*.xcodeproj/xcuserdata/
-/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
+*.xcuserstate
+*.xcodeproj/xcuserdata/
+*.xcworkspace/xcuserdata/
