@@ -25,6 +25,7 @@
 		49270E6F2B4CD7AF008A8E3F /* TappersListView+SmallTapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49270E6E2B4CD7AF008A8E3F /* TappersListView+SmallTapperView.swift */; };
 		49270E722B4CD823008A8E3F /* TappersListView+PreviewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49270E712B4CD823008A8E3F /* TappersListView+PreviewContainer.swift */; };
 		49270E742B50D3DA008A8E3F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49270E732B50D3DA008A8E3F /* LaunchScreen.storyboard */; };
+		C0D3A0022E1B000100000001 /* AppStoreScreenshotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A0012E1B000100000001 /* AppStoreScreenshotUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		49270E6E2B4CD7AF008A8E3F /* TappersListView+SmallTapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TappersListView+SmallTapperView.swift"; sourceTree = "<group>"; };
 		49270E712B4CD823008A8E3F /* TappersListView+PreviewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TappersListView+PreviewContainer.swift"; sourceTree = "<group>"; };
 		49270E732B50D3DA008A8E3F /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		C0D3A0012E1B000100000001 /* AppStoreScreenshotUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreScreenshotUITests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +153,7 @@
 		49270E432B48BC5D008A8E3F /* TapperUITests */ = {
 			isa = PBXGroup;
 			children = (
+				C0D3A0012E1B000100000001 /* AppStoreScreenshotUITests.swift */,
 				49270E442B48BC5D008A8E3F /* TapperUITests.swift */,
 				49270E462B48BC5D008A8E3F /* TapperUITestsLaunchTests.swift */,
 			);
@@ -366,6 +369,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0D3A0022E1B000100000001 /* AppStoreScreenshotUITests.swift in Sources */,
 				49270E472B48BC5D008A8E3F /* TapperUITestsLaunchTests.swift in Sources */,
 				49270E452B48BC5D008A8E3F /* TapperUITests.swift in Sources */,
 			);

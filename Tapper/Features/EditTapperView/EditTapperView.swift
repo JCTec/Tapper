@@ -31,7 +31,28 @@ extension EditTapperView {
     let counterValue: Int
   }
 
+  struct ColorPreset: Identifiable, Equatable {
+    let name: String
+    let hex: String
+
+    var id: String { self.hex }
+
+    var color: Color {
+      return Color(uiColor: UIColor(hex: self.hex) ?? .white)
+    }
+  }
+
   final class ViewModel: ObservableObject {
+    static let colorPresets = [
+      ColorPreset(name: "Snow", hex: "ffffff"),
+      ColorPreset(name: "Lagoon", hex: "62b6cb"),
+      ColorPreset(name: "Mint", hex: "84a59d"),
+      ColorPreset(name: "Sun", hex: "f6bd60"),
+      ColorPreset(name: "Coral", hex: "f28482"),
+      ColorPreset(name: "Indigo", hex: "3d405b"),
+      ColorPreset(name: "Ink", hex: "1b1b1e")
+    ]
+
     @Published var name: String
     @Published var sumatory: Int
     @Published var counterValue: Int
@@ -67,6 +88,10 @@ extension EditTapperView {
       return self.validationMessage == nil
     }
 
+    var selectedBackgroundColorHex: String {
+      return UIColor(self.backgroundColor).hex.lowercased()
+    }
+
     func validatedValues() throws -> ValidatedValues {
       let trimmedName = self.name.trimmingCharacters(in: .whitespacesAndNewlines)
 
@@ -95,6 +120,10 @@ extension EditTapperView {
         backgroundColorHex: backgroundColorHex,
         counterValue: self.counterValue
       )
+    }
+
+    func applyColorPreset(_ preset: ColorPreset) {
+      self.backgroundColor = preset.color
     }
 
     @discardableResult
@@ -130,8 +159,50 @@ struct EditTapperView: View {
   @Environment(\.modelContext) var modelContext
   @State private var isShowingDeleteConfirmation = false
 
+  var previewTextColor: Color {
+    let previewTapper = Tapper(
+      name: self.viewModel.name.isEmpty ? "Tapper" : self.viewModel.name,
+      sumatory: max(self.viewModel.sumatory, 1),
+      allowsNegativeValue: self.viewModel.allowsNegativeValue,
+      backgroundColorHex: self.viewModel.selectedBackgroundColorHex,
+      counterValue: self.viewModel.counterValue
+    )
+
+    return previewTapper.textColor
+  }
+
   var body: some View {
     Form {
+      Section {
+        VStack(alignment: .leading, spacing: .spacing.small) {
+          Text(self.viewModel.name.isEmpty ? "Tapper" : self.viewModel.name)
+            .font(.title3.weight(.bold))
+            .lineLimit(1)
+            .minimumScaleFactor(0.75)
+
+          Text(self.viewModel.counterValue.formatted())
+            .font(.system(size: 42.0, weight: .bold, design: .monospaced))
+            .monospacedDigit()
+            .contentTransition(.numericText())
+
+          Label("Increment \(max(self.viewModel.sumatory, 1))", systemImage: "plus.forwardslash.minus")
+            .font(.caption.weight(.semibold))
+            .foregroundColor(self.previewTextColor.opacity(0.72))
+        }
+        .foregroundColor(self.previewTextColor)
+        .frame(maxWidth: .infinity, minHeight: 118.0, alignment: .leading)
+        .padding(.spacing.medium)
+        .background(self.viewModel.backgroundColor, in: RoundedRectangle(cornerRadius: .cornerRadius.large))
+        .overlay(
+          RoundedRectangle(cornerRadius: .cornerRadius.large)
+            .stroke(self.previewTextColor.opacity(0.14), lineWidth: .borderWidth.standard)
+        )
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("editorPreviewCard")
+      }
+      .listRowBackground(Color.clear)
+      .listRowInsets(EdgeInsets(top: .spacing.small, leading: .spacing.medium, bottom: .spacing.small, trailing: .spacing.medium))
+
       Section("Name") {
         TextField("Name", text: self.$viewModel.name)
           .textInputAutocapitalization(.words)
@@ -147,6 +218,16 @@ struct EditTapperView: View {
         .keyboardType(.numberPad)
         .frame(maxWidth: .infinity)
         .accessibilityIdentifier("incrementField")
+
+        Stepper(
+          value: self.$viewModel.sumatory,
+          in: 1...999,
+          step: 1,
+          label: {
+            Text("Increment \(self.viewModel.sumatory)")
+          }
+        )
+        .accessibilityIdentifier("incrementStepper")
       }
       
       Section("Counter Value") {
@@ -171,6 +252,34 @@ struct EditTapperView: View {
         
         ColorPicker("Select Color", selection: self.$viewModel.backgroundColor, supportsOpacity: false)
           .accessibilityIdentifier("backgroundColorPicker")
+
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 44.0), spacing: .spacing.small)], spacing: .spacing.small) {
+          ForEach(ViewModel.colorPresets) { preset in
+            Button(action: {
+              self.viewModel.applyColorPreset(preset)
+            }, label: {
+              RoundedRectangle(cornerRadius: .cornerRadius.large)
+                .fill(preset.color)
+                .frame(height: 44.0)
+                .overlay(
+                  RoundedRectangle(cornerRadius: .cornerRadius.large)
+                    .stroke(Color.primary.opacity(self.viewModel.selectedBackgroundColorHex == preset.hex ? 0.7 : 0.14), lineWidth: self.viewModel.selectedBackgroundColorHex == preset.hex ? .borderWidth.medium : .borderWidth.standard)
+                )
+                .overlay {
+                  if self.viewModel.selectedBackgroundColorHex == preset.hex {
+                    Image(systemName: "checkmark")
+                      .font(.caption.weight(.bold))
+                      .foregroundStyle(.primary)
+                      .padding(6.0)
+                      .background(.regularMaterial, in: Circle())
+                  }
+                }
+            })
+            .buttonStyle(.plain)
+            .accessibilityLabel(preset.name)
+            .accessibilityIdentifier("colorPreset-\(preset.name)")
+          }
+        }
       }
 
       if let validationMessage = self.viewModel.validationMessage {
@@ -189,7 +298,7 @@ struct EditTapperView: View {
           }, label: {
             Text("Delete Tapper")
           })
-          .accessibilityIdentifier("deleteTapperButton")
+          .accessibilityIdentifier("deleteTapperSectionButton")
         }
       }
     }
@@ -221,6 +330,18 @@ struct EditTapperView: View {
         }
         .disabled(!self.viewModel.canSave)
         .accessibilityIdentifier("saveTapperButton")
+      }
+
+      if self.viewModel.isEditing {
+        ToolbarItem(placement: .topBarTrailing) {
+          Button(role: .destructive, action: {
+            self.isShowingDeleteConfirmation = true
+          }, label: {
+            Image(systemName: "trash")
+          })
+          .accessibilityLabel("Delete Tapper")
+          .accessibilityIdentifier("deleteTapperButton")
+        }
       }
 
       ToolbarItem(placement: .keyboard) {
@@ -259,7 +380,7 @@ struct EditTapperView: View {
   func saveTapper() {
     do {
       _ = try self.viewModel.save(in: self.modelContext)
-      self.path.removeLast()
+      self.closeEditor()
     } catch {
       self.viewModel.errorMessage = error.localizedDescription
     }
@@ -275,7 +396,13 @@ struct EditTapperView: View {
   }
 
   func cancelEditing() {
-    self.path.removeLast()
+    self.closeEditor()
+  }
+
+  func closeEditor() {
+    if self.path.count > 0 {
+      self.path.removeLast()
+    }
   }
 
   static func dismissKeyboard() {
