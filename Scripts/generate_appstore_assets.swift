@@ -3,14 +3,41 @@ import Foundation
 
 let projectRoot = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
 let outputRoot = projectRoot.appendingPathComponent("AppStoreAssets", isDirectory: true)
-let plainOutput = outputRoot.appendingPathComponent("iPhone-6.9-plain", isDirectory: true)
-let showcaseOutput = outputRoot.appendingPathComponent("iPhone-6.9-showcase", isDirectory: true)
 let simulatorCaptureRoot = projectRoot.appendingPathComponent("AppStoreSimulatorCaptures", isDirectory: true)
 let downloadsRoot = URL(fileURLWithPath: "/Users/jc/Downloads", isDirectory: true)
 
-let targetWidth: CGFloat = 1320
-let targetHeight: CGFloat = 2868
-let targetSize = NSSize(width: targetWidth, height: targetHeight)
+struct ScreenshotTarget {
+    let displayName: String
+    let size: NSSize
+    let plainDirectoryName: String
+    let showcaseDirectoryName: String
+    let acceptedDimensions: String
+}
+
+let targets = [
+    ScreenshotTarget(
+        displayName: "iPhone 6.9-inch",
+        size: NSSize(width: 1320, height: 2868),
+        plainDirectoryName: "iPhone-6.9-plain",
+        showcaseDirectoryName: "iPhone-6.9-showcase",
+        acceptedDimensions: "1320x2868"
+    ),
+    ScreenshotTarget(
+        displayName: "iPhone 6.5-inch",
+        size: NSSize(width: 1242, height: 2688),
+        plainDirectoryName: "iPhone-6.5-plain",
+        showcaseDirectoryName: "iPhone-6.5-showcase",
+        acceptedDimensions: "1242x2688"
+    )
+]
+
+let iPadPreviewTarget = ScreenshotTarget(
+    displayName: "iPad 13-inch",
+    size: NSSize(width: 2064, height: 2752),
+    plainDirectoryName: "",
+    showcaseDirectoryName: "iPad-13-previews",
+    acceptedDimensions: "2064x2752"
+)
 
 struct ScreenshotSource {
     let input: URL
@@ -134,12 +161,13 @@ func aspectFillRect(source: NSSize, target: NSSize) -> NSRect {
     )
 }
 
-func rectFromTop(x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat) -> NSRect {
-    NSRect(x: x, y: targetHeight - y - height, width: width, height: height)
+func rectFromTop(target: ScreenshotTarget, x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat) -> NSRect {
+    NSRect(x: x, y: target.size.height - y - height, width: width, height: height)
 }
 
 func drawText(
     _ text: String,
+    target: ScreenshotTarget,
     topY: CGFloat,
     width: CGFloat,
     font: NSFont,
@@ -164,15 +192,21 @@ func drawText(
         with: NSSize(width: width, height: 1000),
         options: [.usesLineFragmentOrigin, .usesFontLeading]
     ).height + 20)
-    let rect = rectFromTop(x: (targetWidth - width) / 2, y: topY, width: width, height: height)
+    let rect = rectFromTop(
+        target: target,
+        x: (target.size.width - width) / 2,
+        y: topY,
+        width: width,
+        height: height
+    )
     attributed.draw(in: rect)
 }
 
-func renderBitmap(_ draw: () -> Void) throws -> NSBitmapImageRep {
+func renderBitmap(target: ScreenshotTarget, _ draw: () -> Void) throws -> NSBitmapImageRep {
     guard let bitmap = NSBitmapImageRep(
         bitmapDataPlanes: nil,
-        pixelsWide: Int(targetWidth),
-        pixelsHigh: Int(targetHeight),
+        pixelsWide: Int(target.size.width),
+        pixelsHigh: Int(target.size.height),
         bitsPerSample: 8,
         samplesPerPixel: 4,
         hasAlpha: true,
@@ -184,7 +218,7 @@ func renderBitmap(_ draw: () -> Void) throws -> NSBitmapImageRep {
         throw NSError(domain: "AppStoreAssets", code: 2, userInfo: [NSLocalizedDescriptionKey: "Could not create bitmap context"])
     }
 
-    bitmap.size = targetSize
+    bitmap.size = target.size
     guard let context = NSGraphicsContext(bitmapImageRep: bitmap) else {
         throw NSError(domain: "AppStoreAssets", code: 3, userInfo: [NSLocalizedDescriptionKey: "Could not create graphics context"])
     }
@@ -205,12 +239,12 @@ func savePNG(_ bitmap: NSBitmapImageRep, to url: URL) throws {
     try png.write(to: url)
 }
 
-func renderPlain(source: NSImage, to url: URL) throws {
-    let output = try renderBitmap {
+func renderPlain(source: NSImage, target: ScreenshotTarget, to url: URL) throws {
+    let output = try renderBitmap(target: target) {
         NSColor.black.setFill()
-        NSBezierPath(rect: NSRect(origin: .zero, size: targetSize)).fill()
+        NSBezierPath(rect: NSRect(origin: .zero, size: target.size)).fill()
         source.draw(
-            in: aspectFillRect(source: source.size, target: targetSize),
+            in: aspectFillRect(source: source.size, target: target.size),
             from: NSRect(origin: .zero, size: source.size),
             operation: .sourceOver,
             fraction: 1
@@ -219,45 +253,49 @@ func renderPlain(source: NSImage, to url: URL) throws {
     try savePNG(output, to: url)
 }
 
-func renderShowcase(source: NSImage, item: ScreenshotSource, to url: URL) throws {
-    let output = try renderBitmap {
-        let fullRect = NSRect(origin: .zero, size: targetSize)
+func renderShowcase(source: NSImage, item: ScreenshotSource, target: ScreenshotTarget, to url: URL) throws {
+    let output = try renderBitmap(target: target) {
+        let scale = min(target.size.width / 1320, target.size.height / 2868)
+        let fullRect = NSRect(origin: .zero, size: target.size)
         let gradient = NSGradient(starting: item.backgroundTop, ending: item.backgroundBottom)
         gradient?.draw(in: fullRect, angle: -90)
 
         drawText(
             item.title,
-            topY: 145,
-            width: 1060,
-            font: NSFont.systemFont(ofSize: 92, weight: .black),
+            target: target,
+            topY: 145 * scale,
+            width: 1060 * scale,
+            font: NSFont.systemFont(ofSize: 92 * scale, weight: .black),
             color: item.titleColor,
-            lineHeight: 106
+            lineHeight: 106 * scale
         )
         drawText(
             item.subtitle,
-            topY: 270,
-            width: 1040,
-            font: NSFont.systemFont(ofSize: 44, weight: .semibold),
+            target: target,
+            topY: 270 * scale,
+            width: 1040 * scale,
+            font: NSFont.systemFont(ofSize: 44 * scale, weight: .semibold),
             color: item.subtitleColor,
-            lineHeight: 56
+            lineHeight: 56 * scale
         )
 
-        let phoneWidth: CGFloat = 946
+        let phoneWidth: CGFloat = 946 * scale
         let phoneHeight = phoneWidth * source.size.height / source.size.width
         let phoneRect = rectFromTop(
-            x: (targetWidth - phoneWidth) / 2,
-            y: 505,
+            target: target,
+            x: (target.size.width - phoneWidth) / 2,
+            y: 505 * scale,
             width: phoneWidth,
             height: phoneHeight
         )
-        let cornerRadius: CGFloat = 76
+        let cornerRadius: CGFloat = 76 * scale
         let phonePath = NSBezierPath(roundedRect: phoneRect, xRadius: cornerRadius, yRadius: cornerRadius)
 
         NSGraphicsContext.saveGraphicsState()
         let shadow = NSShadow()
         shadow.shadowColor = NSColor.black.withAlphaComponent(0.34)
-        shadow.shadowBlurRadius = 54
-        shadow.shadowOffset = NSSize(width: 0, height: -22)
+        shadow.shadowBlurRadius = 54 * scale
+        shadow.shadowOffset = NSSize(width: 0, height: -22 * scale)
         shadow.set()
         NSColor.black.withAlphaComponent(0.16).setFill()
         phonePath.fill()
@@ -274,8 +312,73 @@ func renderShowcase(source: NSImage, item: ScreenshotSource, to url: URL) throws
         NSGraphicsContext.restoreGraphicsState()
 
         NSColor.white.withAlphaComponent(0.18).setStroke()
-        phonePath.lineWidth = 3
+        phonePath.lineWidth = 3 * scale
         phonePath.stroke()
+    }
+    try savePNG(output, to: url)
+}
+
+func renderIPadPreview(source: NSImage, item: ScreenshotSource, target: ScreenshotTarget, to url: URL) throws {
+    let output = try renderBitmap(target: target) {
+        let scale = min(target.size.width / 2064, target.size.height / 2752)
+        let fullRect = NSRect(origin: .zero, size: target.size)
+        let gradient = NSGradient(starting: item.backgroundTop, ending: item.backgroundBottom)
+        gradient?.draw(in: fullRect, angle: -90)
+
+        drawText(
+            item.title,
+            target: target,
+            topY: 145 * scale,
+            width: 1660 * scale,
+            font: NSFont.systemFont(ofSize: 132 * scale, weight: .black),
+            color: item.titleColor,
+            lineHeight: 150 * scale
+        )
+        drawText(
+            item.subtitle,
+            target: target,
+            topY: 325 * scale,
+            width: 1580 * scale,
+            font: NSFont.systemFont(ofSize: 62 * scale, weight: .semibold),
+            color: item.subtitleColor,
+            lineHeight: 78 * scale
+        )
+
+        let previewWidth: CGFloat = 1010 * scale
+        let previewHeight = previewWidth * source.size.height / source.size.width
+        let previewRect = rectFromTop(
+            target: target,
+            x: (target.size.width - previewWidth) / 2,
+            y: 515 * scale,
+            width: previewWidth,
+            height: previewHeight
+        )
+        let cornerRadius: CGFloat = 74 * scale
+        let previewPath = NSBezierPath(roundedRect: previewRect, xRadius: cornerRadius, yRadius: cornerRadius)
+
+        NSGraphicsContext.saveGraphicsState()
+        let shadow = NSShadow()
+        shadow.shadowColor = NSColor.black.withAlphaComponent(0.32)
+        shadow.shadowBlurRadius = 70 * scale
+        shadow.shadowOffset = NSSize(width: 0, height: -28 * scale)
+        shadow.set()
+        NSColor.black.withAlphaComponent(0.16).setFill()
+        previewPath.fill()
+        NSGraphicsContext.restoreGraphicsState()
+
+        NSGraphicsContext.saveGraphicsState()
+        previewPath.addClip()
+        source.draw(
+            in: previewRect,
+            from: NSRect(origin: .zero, size: source.size),
+            operation: .sourceOver,
+            fraction: 1
+        )
+        NSGraphicsContext.restoreGraphicsState()
+
+        NSColor.white.withAlphaComponent(0.18).setStroke()
+        previewPath.lineWidth = 4 * scale
+        previewPath.stroke()
     }
     try savePNG(output, to: url)
 }
@@ -300,23 +403,55 @@ func writeReadme() throws {
     - `AppIcon-1024.png`: copied from the app icon asset catalog.
     - `iPhone-6.9-plain/`: exact-size, upload-ready screenshots at `1320x2868`.
     - `iPhone-6.9-showcase/`: App Store-style screenshots with short captions at `1320x2868`.
+    - `iPhone-6.5-plain/`: exact-size, upload-ready screenshots at `1242x2688`.
+    - `iPhone-6.5-showcase/`: App Store-style screenshots with short captions at `1242x2688`.
+    - `iPad-13-previews/`: three App Store-style iPad previews at `2064x2752`.
 
     To refresh from Simulator, run `AppStoreScreenshotUITests`, copy or export `01-dashboard.png` through `04-squats.png` into `/Users/jc/Dev/Tapper/AppStoreSimulatorCaptures`, then rerun `swift Scripts/generate_appstore_assets.swift`.
 
-    Apple currently accepts `1320x2868` portrait screenshots for 6.9-inch iPhone displays.
+    Apple currently accepts `1320x2868` portrait screenshots for 6.9-inch iPhone displays, `1242x2688` portrait screenshots for 6.5-inch iPhone displays, and `2064x2752` portrait screenshots for iPad 13-inch displays.
 
     """
     try readme.write(to: outputRoot.appendingPathComponent("README.md"), atomically: true, encoding: .utf8)
 }
 
 try removeAndCreateDirectory(outputRoot)
-try FileManager.default.createDirectory(at: plainOutput, withIntermediateDirectories: true)
-try FileManager.default.createDirectory(at: showcaseOutput, withIntermediateDirectories: true)
+for target in targets {
+    try FileManager.default.createDirectory(
+        at: outputRoot.appendingPathComponent(target.plainDirectoryName, isDirectory: true),
+        withIntermediateDirectories: true
+    )
+    try FileManager.default.createDirectory(
+        at: outputRoot.appendingPathComponent(target.showcaseDirectoryName, isDirectory: true),
+        withIntermediateDirectories: true
+    )
+}
+try FileManager.default.createDirectory(
+    at: outputRoot.appendingPathComponent(iPadPreviewTarget.showcaseDirectoryName, isDirectory: true),
+    withIntermediateDirectories: true
+)
 
 for item in sources {
     let image = try loadImage(item.input)
-    try renderPlain(source: image, to: plainOutput.appendingPathComponent(item.plainFilename))
-    try renderShowcase(source: image, item: item, to: showcaseOutput.appendingPathComponent(item.showcaseFilename))
+
+    for target in targets {
+        let plainOutput = outputRoot.appendingPathComponent(target.plainDirectoryName, isDirectory: true)
+        let showcaseOutput = outputRoot.appendingPathComponent(target.showcaseDirectoryName, isDirectory: true)
+
+        try renderPlain(source: image, target: target, to: plainOutput.appendingPathComponent(item.plainFilename))
+        try renderShowcase(source: image, item: item, target: target, to: showcaseOutput.appendingPathComponent(item.showcaseFilename))
+    }
+}
+
+let iPadPreviewOutput = outputRoot.appendingPathComponent(iPadPreviewTarget.showcaseDirectoryName, isDirectory: true)
+for item in sources.prefix(3) {
+    let image = try loadImage(item.input)
+    try renderIPadPreview(
+        source: image,
+        item: item,
+        target: iPadPreviewTarget,
+        to: iPadPreviewOutput.appendingPathComponent(item.showcaseFilename)
+    )
 }
 
 try copyIcon()
