@@ -1,0 +1,86 @@
+{
+  "$comment": "Single source of truth for Tapper's marketing imagery. Consumed by Scripts/generate_appstore_assets.swift and quoted by docs/APP_STORE.md. Colors are [red, green, blue] in the 0-255 range.",
+
+  "app": {
+    "name": "Tapper",
+    "tagline": "Count anything, one tap at a time.",
+    "heroMeta": "iOS 17  ·  SwiftUI  ·  SwiftData  ·  App Intents",
+    "heroGradient": { "top": [8, 12, 28], "bottom": [17, 24, 48] },
+    "heroTitleColor": [255, 255, 255],
+    "heroSubtitleColor": [204, 211, 224],
+    "heroMetaColor": [128, 142, 170]
+  },
+
+  "screenshots": [
+    {
+      "id": "01-dashboard",
+      "showcaseFilename": "01-all-your-counters.png",
+      "title": "All Your Counters",
+      "subtitle": "Colorful tappers, sorted and ready.",
+      "gradient": { "top": [8, 12, 28], "bottom": [17, 24, 48] },
+      "titleColor": [255, 255, 255],
+      "subtitleColor": [204, 211, 224]
+    },
+    {
+      "id": "02-push-ups",
+      "showcaseFilename": "02-tap-to-count.png",
+      "title": "Tap To Count",
+      "subtitle": "Big controls for quick sessions.",
+      "gradient": { "top": [255, 221, 79], "bottom": [249, 196, 44] },
+      "titleColor": [9, 12, 25],
+      "subtitleColor": [57, 48, 21]
+    },
+    {
+      "id": "03-sit-ups",
+      "showcaseFilename": "03-stay-in-flow.png",
+      "title": "Stay In Flow",
+      "subtitle": "Reset or edit without losing focus.",
+      "gradient": { "top": [244, 78, 62], "bottom": [226, 62, 56] },
+      "titleColor": [9, 12, 25],
+      "subtitleColor": [47, 23, 25]
+    },
+    {
+      "id": "04-squats",
+      "showcaseFilename": "04-color-code-it.png",
+      "title": "Color Code It",
+      "subtitle": "Spot every counter at a glance.",
+      "gradient": { "top": [105, 207, 105], "bottom": [77, 184, 91] },
+      "titleColor": [9, 12, 25],
+      "subtitleColor": [23, 58, 32]
+    }
+  ],
+
+  "targets": [
+    {
+      "id": "iPhone-6.9",
+      "displayName": "iPhone 6.9-inch",
+      "width": 1320,
+      "height": 2868,
+      "sourceDevice": "iPhone 16 Pro Max",
+      "plainDirectory": "iPhone-6.9-plain",
+      "showcaseDirectory": "iPhone-6.9-showcase",
+      "style": "iphone",
+      "mirrorsToLegacyCaptures": true
+    },
+    {
+      "id": "iPhone-6.5",
+      "displayName": "iPhone 6.5-inch",
+      "width": 1242,
+      "height": 2688,
+      "sourceDevice": "iPhone 11 Pro Max",
+      "plainDirectory": "iPhone-6.5-plain",
+      "showcaseDirectory": "iPhone-6.5-showcase",
+      "style": "iphone"
+    },
+    {
+      "id": "iPad-13",
+      "displayName": "iPad 13-inch",
+      "width": 2064,
+      "height": 2752,
+      "sourceDevice": "iPad Pro 13-inch (M4)",
+      "showcaseDirectory": "iPad-13-previews",
+      "style": "ipad",
+      "limit": 3
+    }
+  ]
+}

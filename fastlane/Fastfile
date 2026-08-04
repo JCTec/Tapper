@@ -1,0 +1,147 @@
+# Tapper automation.
+#
+# Scope note: this file deliberately contains no App Store Connect actions.
+# There is no `deliver`, `pilot`, `match`, or `gym` here, nothing authenticates,
+# and no signing certificates are required — every lane targets a simulator.
+# See docs/CI.md.
+
+require "json"
+require "shellwords"
+
+default_platform(:ios)
+
+PROJECT = "Tapper.xcodeproj".freeze
+SCHEME = "Tapper".freeze
+TEST_OUTPUT = "./fastlane/test_output".freeze
+
+# Marketing captures are pinned to these devices because each one renders at an
+# App Store upload size, so the renderer never upscales. Keep in sync with the
+# `sourceDevice` values in Marketing/copy.json and with fastlane/Snapfile.
+#
+#   iPhone 16 Pro Max     1320x2868   6.9-inch
+#   iPhone 11 Pro Max     1242x2688   6.5-inch
+#   iPad Pro 13-inch (M4) 2064x2752   13-inch
+MARKETING_DEVICES = [
+  "iPhone 16 Pro Max",
+  "iPhone 11 Pro Max",
+  "iPad Pro 13-inch (M4)"
+].freeze
+
+# Tests just need any iPhone, so resolve one that actually exists rather than
+# hardcoding a name that varies with the installed Xcode.
+PREFERRED_TEST_DEVICES = [
+  "iPhone 17",
+  "iPhone 16",
+  "iPhone 16 Pro",
+  "iPhone 15"
+].freeze
+
+def available_simulator_names
+  json = JSON.parse(`xcrun simctl list devices available --json`)
+  json["devices"].values.flatten.map { |device| device["name"] }
+rescue JSON::ParserError
+  UI.user_error!("Could not read the simulator list from `xcrun simctl`.")
+end
+
+def newest_ios_runtime
+  json = JSON.parse(`xcrun simctl list runtimes --json`)
+  runtimes = json["runtimes"].select do |runtime|
+    runtime["isAvailable"] && runtime["identifier"].include?("SimRuntime.iOS")
+  end
+
+  UI.user_error!("No iOS simulator runtime is installed.") if runtimes.empty?
+
+  runtimes.max_by { |runtime| Gem::Version.new(runtime["version"]) }["identifier"]
+end
+
+# Shared `scan` options. `cloned_source_packages_path` stays nil unless CI sets
+# SPM_CACHE_PATH, so local runs keep using the normal DerivedData location.
+def test_options
+  {
+    project: PROJECT,
+    scheme: SCHEME,
+    devices: [resolve_test_device],
+    result_bundle: true,
+    output_directory: TEST_OUTPUT,
+    output_types: "junit",
+    cloned_source_packages_path: ENV["SPM_CACHE_PATH"]
+  }.compact
+end
+
+def resolve_test_device
+  override = ENV["TEST_DEVICE"]
+  return override unless override.nil? || override.empty?
+
+  available = available_simulator_names
+  device = PREFERRED_TEST_DEVICES.find { |name| available.include?(name) }
+  device ||= available.find { |name| name.start_with?("iPhone") }
+
+  UI.user_error!("No iPhone simulator available. Create one in Xcode or set TEST_DEVICE.") if device.nil?
+
+  UI.message("Testing on #{device}")
+  device
+end
+
+platform :ios do
+  desc "Create any missing marketing simulator so screenshots are reproducible"
+  lane :prepare_simulators do
+    available = available_simulator_names
+    missing = MARKETING_DEVICES.reject { |name| available.include?(name) }
+
+    if missing.empty?
+      UI.message("All marketing simulators are present.")
+      next
+    end
+
+    runtime = newest_ios_runtime
+    missing.each do |name|
+      UI.message("Creating simulator: #{name}")
+      sh("xcrun simctl create #{name.shellescape} #{name.shellescape} #{runtime.shellescape}", log: false)
+    end
+  end
+
+  desc "Run the TapperTests unit bundle"
+  lane :unit_tests do
+    run_tests(test_options.merge(
+      only_testing: ["TapperTests"],
+      code_coverage: true
+    ))
+  end
+
+  desc "Run the TapperUITests bundle, excluding the marketing screenshot run"
+  lane :ui_tests do
+    run_tests(test_options.merge(
+      only_testing: [
+        "TapperUITests/TapperUITests",
+        "TapperUITests/TapperUITestsLaunchTests"
+      ]
+    ))
+  end
+
+  desc "Run every test bundle (unit + UI), skipping the screenshot run"
+  lane :test do
+    run_tests(test_options.merge(
+      skip_testing: ["TapperUITests/AppStoreScreenshotUITests"],
+      code_coverage: true
+    ))
+  end
+
+  desc "Capture simulator screenshots and render the branded marketing assets"
+  lane :screenshots do
+    prepare_simulators
+    capture_screenshots
+    marketing
+  end
+
+  desc "Re-render App Store and README assets from existing captures (no simulator)"
+  lane :marketing do
+    # `sh` runs with the working directory set to fastlane/, hence the `cd ..`.
+    sh("cd .. && swift Scripts/generate_appstore_assets.swift")
+  end
+
+  desc "Everything CI runs: tests, then screenshots and marketing assets"
+  lane :ci do
+    test
+    screenshots
+  end
+end

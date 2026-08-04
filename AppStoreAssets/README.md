@@ -1,16 +1,24 @@
 # Tapper App Store Assets
 
-Generated from screenshots in `/Users/jc/Dev/Tapper/AppStoreSimulatorCaptures` on 2026-06-30.
+Generated from fastlane snapshot captures in `fastlane/screenshots/en-US` on 2026-08-04.
+
+**This directory is generated — do not edit it by hand.** Every run replaces
+its entire contents. Captions and palettes live in `Marketing/copy.json`.
 
 ## Contents
 
 - `AppIcon-1024.png`: copied from the app icon asset catalog.
 - `iPhone-6.9-plain/`: exact-size, upload-ready screenshots at `1320x2868`.
-- `iPhone-6.9-showcase/`: App Store-style screenshots with short captions at `1320x2868`.
+- `iPhone-6.9-showcase/`: captioned App Store screenshots at `1320x2868`.
 - `iPhone-6.5-plain/`: exact-size, upload-ready screenshots at `1242x2688`.
-- `iPhone-6.5-showcase/`: App Store-style screenshots with short captions at `1242x2688`.
-- `iPad-13-previews/`: three App Store-style iPad previews at `2064x2752`.
+- `iPhone-6.5-showcase/`: captioned App Store screenshots at `1242x2688`.
+- `iPad-13-previews/`: captioned App Store screenshots at `2064x2752` (3 images).
 
-To refresh from Simulator, run `AppStoreScreenshotUITests`, copy or export `01-dashboard.png` through `04-squats.png` into `/Users/jc/Dev/Tapper/AppStoreSimulatorCaptures`, then rerun `swift Scripts/generate_appstore_assets.swift`.
+## Refreshing
 
-Apple currently accepts `1320x2868` portrait screenshots for 6.9-inch iPhone displays, `1242x2688` portrait screenshots for 6.5-inch iPhone displays, and `2064x2752` portrait screenshots for iPad 13-inch displays.
+```sh
+bundle exec fastlane screenshots   # capture on every device, then render
+bundle exec fastlane marketing     # re-render from existing captures
+```
+
+Apple currently accepts `1320x2868` for iPhone 6.9-inch displays, `1242x2688` for iPhone 6.5-inch displays, `2064x2752` for iPad 13-inch displays.
