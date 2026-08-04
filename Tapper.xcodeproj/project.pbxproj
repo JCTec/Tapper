@@ -26,6 +26,7 @@
 		49270E722B4CD823008A8E3F /* TappersListView+PreviewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49270E712B4CD823008A8E3F /* TappersListView+PreviewContainer.swift */; };
 		49270E742B50D3DA008A8E3F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49270E732B50D3DA008A8E3F /* LaunchScreen.storyboard */; };
 		C0D3A0022E1B000100000001 /* AppStoreScreenshotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A0012E1B000100000001 /* AppStoreScreenshotUITests.swift */; };
+		C0D3A0042E1B000100000001 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A0032E1B000100000001 /* SnapshotHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		49270E712B4CD823008A8E3F /* TappersListView+PreviewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TappersListView+PreviewContainer.swift"; sourceTree = "<group>"; };
 		49270E732B50D3DA008A8E3F /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C0D3A0012E1B000100000001 /* AppStoreScreenshotUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreScreenshotUITests.swift; sourceTree = "<group>"; };
+		C0D3A0032E1B000100000001 /* SnapshotHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				C0D3A0012E1B000100000001 /* AppStoreScreenshotUITests.swift */,
+				C0D3A0032E1B000100000001 /* SnapshotHelper.swift */,
 				49270E442B48BC5D008A8E3F /* TapperUITests.swift */,
 				49270E462B48BC5D008A8E3F /* TapperUITestsLaunchTests.swift */,
 			);
@@ -370,6 +373,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0D3A0022E1B000100000001 /* AppStoreScreenshotUITests.swift in Sources */,
+				C0D3A0042E1B000100000001 /* SnapshotHelper.swift in Sources */,
 				49270E472B48BC5D008A8E3F /* TapperUITestsLaunchTests.swift in Sources */,
 				49270E452B48BC5D008A8E3F /* TapperUITests.swift in Sources */,
 			);

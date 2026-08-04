@@ -1,0 +1,34 @@
+# Devices are chosen so each capture is already at an App Store upload size,
+# which means the renderer never has to upscale. Keep these in sync with the
+# `sourceDevice` values in Marketing/copy.json:
+#
+#   iPhone 16 Pro Max    1320x2868   6.9-inch
+#   iPhone 11 Pro Max    1242x2688   6.5-inch
+#   iPad Pro 13-inch     2064x2752   13-inch
+project("./Tapper.xcodeproj")
+scheme("Tapper")
+
+devices([
+  "iPhone 16 Pro Max",
+  "iPhone 11 Pro Max",
+  "iPad Pro 13-inch (M4)"
+])
+
+languages(["en-US"])
+
+output_directory("./fastlane/screenshots")
+only_testing(["TapperUITests/AppStoreScreenshotUITests"])
+
+clear_previous_screenshots(true)
+
+# Pins the status bar to 9:41, full battery, full signal.
+override_status_bar(true)
+
+# The showcase gradients in Marketing/copy.json were designed against dark-mode
+# captures. Without this the simulator defaults to light and the frames lose
+# their contrast against the dark navy background.
+dark_mode(true)
+
+concurrent_simulators(true)
+stop_after_first_error(true)
+skip_open_summary(true)

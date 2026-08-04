@@ -1,0 +1,5 @@
+app_identifier("com.jctec.Tapper")
+team_id("S8662L649U")
+
+# No `apple_id` on purpose. Every lane in this project targets a simulator and
+# nothing here authenticates against App Store Connect — see docs/CI.md.

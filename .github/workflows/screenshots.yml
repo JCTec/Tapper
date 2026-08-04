@@ -1,0 +1,64 @@
+name: Marketing screenshots
+
+# Deliberately not run on every pull request: capturing four screens across
+# three simulators takes far longer than the test suite. Trigger it by hand
+# from the Actions tab, or let a release tag do it.
+on:
+  workflow_dispatch:
+  push:
+    tags: ["v*"]
+
+concurrency:
+  group: screenshots-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  screenshots:
+    name: Capture and render
+    runs-on: macos-15
+    timeout-minutes: 60
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
+      - name: Set up Ruby and install gems
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "4.0"
+          bundler-cache: true
+
+      # The marketing devices are pinned for exact pixel sizes, so surface what
+      # the runner's Xcode actually offers before `prepare_simulators` runs.
+      - name: Show available simulator device types
+        run: xcrun simctl list devicetypes available
+
+      - name: Capture screenshots and render marketing assets
+        run: bundle exec fastlane screenshots
+
+      - name: Upload App Store assets
+        uses: actions/upload-artifact@v4
+        with:
+          name: appstore-assets
+          path: AppStoreAssets
+          retention-days: 30
+
+      - name: Upload README artwork
+        uses: actions/upload-artifact@v4
+        with:
+          name: readme-artwork
+          path: docs/assets
+          retention-days: 30
+
+      - name: Upload raw captures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: raw-captures
+          path: fastlane/screenshots
+          retention-days: 14
+          if-no-files-found: warn

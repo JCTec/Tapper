@@ -5,3 +5,23 @@ DerivedData/
 *.xcuserstate
 *.xcodeproj/xcuserdata/
 *.xcworkspace/xcuserdata/
+
+# Swift Package Manager cache used by CI
+.swiftpm-cache/
+
+# Ruby / bundler
+.bundle/
+vendor/bundle/
+
+# fastlane
+# Raw captures are regenerable and large; the rendered assets in
+# AppStoreAssets/ and docs/assets/ are committed instead.
+fastlane/screenshots/
+fastlane/test_output/
+fastlane/report.xml
+fastlane/Preview.html
+*.xcresult
+
+# Scratch output
+tmp/
+output/

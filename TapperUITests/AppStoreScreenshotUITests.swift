@@ -1,8 +1,17 @@
 import XCTest
 
+/// Captures the marketing screenshots that feed `Scripts/generate_appstore_assets.swift`.
+///
+/// Run it through fastlane rather than Xcode so every device in `fastlane/Snapfile`
+/// is covered and the status bar is pinned:
+///
+///     bundle exec fastlane screenshots
+///
+/// Captures land in `fastlane/screenshots/en-US/<device>-<name>.png`. The names
+/// here must match the `id` values in `Marketing/copy.json`.
+@MainActor
 final class AppStoreScreenshotUITests: XCTestCase {
   private var app: XCUIApplication!
-  private var screenshotDirectory: URL!
 
   override func setUpWithError() throws {
     try super.setUpWithError()
@@ -10,16 +19,15 @@ final class AppStoreScreenshotUITests: XCTestCase {
     continueAfterFailure = false
 
     self.app = XCUIApplication()
-    self.app.launchArguments = ["-ShowcaseData"]
 
-    let directoryPath = ProcessInfo.processInfo.environment["APPSTORE_SCREENSHOT_DIR"]
-      ?? NSTemporaryDirectory()
-    self.screenshotDirectory = URL(fileURLWithPath: directoryPath, isDirectory: true)
+    // Must be assigned before `setupSnapshot`, which appends fastlane's own
+    // locale and `-FASTLANE_SNAPSHOT` arguments rather than replacing them.
+    self.app.launchArguments = ["-ShowcaseData"]
+    setupSnapshot(self.app)
   }
 
   override func tearDownWithError() throws {
     self.app = nil
-    self.screenshotDirectory = nil
 
     try super.tearDownWithError()
   }
@@ -28,18 +36,18 @@ final class AppStoreScreenshotUITests: XCTestCase {
     self.app.launch()
 
     XCTAssertTrue(self.app.staticTexts["Tappers"].waitForExistence(timeout: 5.0))
-    try self.captureScreenshot(named: "01-dashboard")
+    self.captureScreenshot(named: "01-dashboard")
 
     try self.openTapper(named: "Push-ups")
-    try self.captureScreenshot(named: "02-push-ups")
+    self.captureScreenshot(named: "02-push-ups")
     self.app.buttons["closeTapperButton"].tap()
 
     try self.openTapper(named: "Sit-ups")
-    try self.captureScreenshot(named: "03-sit-ups")
+    self.captureScreenshot(named: "03-sit-ups")
     self.app.buttons["closeTapperButton"].tap()
 
     try self.openTapper(named: "Squats")
-    try self.captureScreenshot(named: "04-squats")
+    self.captureScreenshot(named: "04-squats")
   }
 
   private func openTapper(named name: String) throws {
@@ -52,18 +60,12 @@ final class AppStoreScreenshotUITests: XCTestCase {
     XCTAssertEqual(nameLabel.label, name)
   }
 
-  private func captureScreenshot(named name: String) throws {
-    try FileManager.default.createDirectory(
-      at: self.screenshotDirectory,
-      withIntermediateDirectories: true
-    )
+  /// Hands the shot to fastlane and also attaches it, so a CI `.xcresult`
+  /// carries the captures even when the snapshot export is unavailable.
+  private func captureScreenshot(named name: String) {
+    snapshot(name)
 
-    let screenshot = XCUIScreen.main.screenshot()
-    let outputURL = self.screenshotDirectory.appendingPathComponent("\(name).png")
-    try screenshot.pngRepresentation.write(to: outputURL, options: .atomic)
-    print("Saved App Store screenshot: \(outputURL.path)")
-
-    let attachment = XCTAttachment(screenshot: screenshot)
+    let attachment = XCTAttachment(screenshot: XCUIScreen.main.screenshot())
     attachment.name = name
     attachment.lifetime = .keepAlways
     self.add(attachment)
