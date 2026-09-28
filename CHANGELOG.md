@@ -43,6 +43,11 @@ Entries below 1.0 are reconstructed from git history and are dated by commit.
 - `README.md` rewritten from a single line into a full project page.
 - Privacy policy now has a Markdown source; previously only a PDF existed, with
   no script to regenerate it.
+- Internal: every feature now follows the `Feature.swift` + `Feature+Name.swift`
+  layout. Inner views are nested structs instead of `some View` properties.
+  `EditTapperView.ViewModel` moved from `ObservableObject` to `@Observable`, and
+  the duplicated press button style became the shared
+  `Components/PressButtonStyle`. No user-facing change.
 
 ### Fixed
 

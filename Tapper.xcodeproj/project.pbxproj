@@ -22,11 +22,35 @@
 		49270E5E2B49CA2C008A8E3F /* TappersListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49270E5D2B49CA2C008A8E3F /* TappersListView.swift */; };
 		49270E602B4A2BF2008A8E3F /* EditTapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49270E5F2B4A2BF2008A8E3F /* EditTapperView.swift */; };
 		49270E6D2B4C799F008A8E3F /* TapperNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49270E6C2B4C799F008A8E3F /* TapperNavigationView.swift */; };
-		49270E6F2B4CD7AF008A8E3F /* TappersListView+SmallTapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49270E6E2B4CD7AF008A8E3F /* TappersListView+SmallTapperView.swift */; };
+		49270E6F2B4CD7AF008A8E3F /* SmallTapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49270E6E2B4CD7AF008A8E3F /* SmallTapperView.swift */; };
 		49270E722B4CD823008A8E3F /* TappersListView+PreviewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49270E712B4CD823008A8E3F /* TappersListView+PreviewContainer.swift */; };
 		49270E742B50D3DA008A8E3F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49270E732B50D3DA008A8E3F /* LaunchScreen.storyboard */; };
 		C0D3A0022E1B000100000001 /* AppStoreScreenshotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A0012E1B000100000001 /* AppStoreScreenshotUITests.swift */; };
 		C0D3A0042E1B000100000001 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A0032E1B000100000001 /* SnapshotHelper.swift */; };
+		C0D3A2012E1B000100000001 /* PressButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A1012E1B000100000001 /* PressButtonStyle.swift */; };
+		C0D3A2022E1B000100000001 /* EditTapperView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A1022E1B000100000001 /* EditTapperView+ViewModel.swift */; };
+		C0D3A2032E1B000100000001 /* EditTapperView+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A1032E1B000100000001 /* EditTapperView+Validation.swift */; };
+		C0D3A2042E1B000100000001 /* EditTapperView+ColorPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A1042E1B000100000001 /* EditTapperView+ColorPreset.swift */; };
+		C0D3A2052E1B000100000001 /* EditTapperView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A1052E1B000100000001 /* EditTapperView+Helpers.swift */; };
+		C0D3A2062E1B000100000001 /* EditTapperView+PreviewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A1062E1B000100000001 /* EditTapperView+PreviewCard.swift */; };
+		C0D3A2072E1B000100000001 /* EditTapperView+NameSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A1072E1B000100000001 /* EditTapperView+NameSection.swift */; };
+		C0D3A2082E1B000100000001 /* EditTapperView+IncrementSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A1082E1B000100000001 /* EditTapperView+IncrementSection.swift */; };
+		C0D3A2092E1B000100000001 /* EditTapperView+CounterValueSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A1092E1B000100000001 /* EditTapperView+CounterValueSection.swift */; };
+		C0D3A20A2E1B000100000001 /* EditTapperView+BackgroundColorSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A10A2E1B000100000001 /* EditTapperView+BackgroundColorSection.swift */; };
+		C0D3A20B2E1B000100000001 /* EditTapperView+DeleteSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A10B2E1B000100000001 /* EditTapperView+DeleteSection.swift */; };
+		C0D3A20C2E1B000100000001 /* TapperView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A10C2E1B000100000001 /* TapperView+Helpers.swift */; };
+		C0D3A20D2E1B000100000001 /* TapperView+TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A10D2E1B000100000001 /* TapperView+TopView.swift */; };
+		C0D3A20E2E1B000100000001 /* TapperView+BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A10E2E1B000100000001 /* TapperView+BottomView.swift */; };
+		C0D3A20F2E1B000100000001 /* TapperView+ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A10F2E1B000100000001 /* TapperView+ActionButton.swift */; };
+		C0D3A2102E1B000100000001 /* TappersListView+SortMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A1102E1B000100000001 /* TappersListView+SortMode.swift */; };
+		C0D3A2112E1B000100000001 /* TappersListView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A1112E1B000100000001 /* TappersListView+Helpers.swift */; };
+		C0D3A2122E1B000100000001 /* TappersListView+TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A1122E1B000100000001 /* TappersListView+TitleView.swift */; };
+		C0D3A2132E1B000100000001 /* TappersListView+ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A1132E1B000100000001 /* TappersListView+ControlsView.swift */; };
+		C0D3A2142E1B000100000001 /* TappersListView+SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A1142E1B000100000001 /* TappersListView+SearchView.swift */; };
+		C0D3A2152E1B000100000001 /* TappersListView+ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A1152E1B000100000001 /* TappersListView+ContentView.swift */; };
+		C0D3A2162E1B000100000001 /* SmallTapperView+TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A1162E1B000100000001 /* SmallTapperView+TitleView.swift */; };
+		C0D3A2172E1B000100000001 /* SmallTapperView+ActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A1172E1B000100000001 /* SmallTapperView+ActionView.swift */; };
+		C0D3A2182E1B000100000001 /* SmallTapperView+ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A1182E1B000100000001 /* SmallTapperView+ActionButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,11 +90,35 @@
 		49270E5D2B49CA2C008A8E3F /* TappersListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TappersListView.swift; sourceTree = "<group>"; };
 		49270E5F2B4A2BF2008A8E3F /* EditTapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTapperView.swift; sourceTree = "<group>"; };
 		49270E6C2B4C799F008A8E3F /* TapperNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapperNavigationView.swift; sourceTree = "<group>"; };
-		49270E6E2B4CD7AF008A8E3F /* TappersListView+SmallTapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TappersListView+SmallTapperView.swift"; sourceTree = "<group>"; };
+		49270E6E2B4CD7AF008A8E3F /* SmallTapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallTapperView.swift; sourceTree = "<group>"; };
 		49270E712B4CD823008A8E3F /* TappersListView+PreviewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TappersListView+PreviewContainer.swift"; sourceTree = "<group>"; };
 		49270E732B50D3DA008A8E3F /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C0D3A0012E1B000100000001 /* AppStoreScreenshotUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreScreenshotUITests.swift; sourceTree = "<group>"; };
 		C0D3A0032E1B000100000001 /* SnapshotHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
+		C0D3A1012E1B000100000001 /* PressButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressButtonStyle.swift; sourceTree = "<group>"; };
+		C0D3A1022E1B000100000001 /* EditTapperView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditTapperView+ViewModel.swift"; sourceTree = "<group>"; };
+		C0D3A1032E1B000100000001 /* EditTapperView+Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditTapperView+Validation.swift"; sourceTree = "<group>"; };
+		C0D3A1042E1B000100000001 /* EditTapperView+ColorPreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditTapperView+ColorPreset.swift"; sourceTree = "<group>"; };
+		C0D3A1052E1B000100000001 /* EditTapperView+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditTapperView+Helpers.swift"; sourceTree = "<group>"; };
+		C0D3A1062E1B000100000001 /* EditTapperView+PreviewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditTapperView+PreviewCard.swift"; sourceTree = "<group>"; };
+		C0D3A1072E1B000100000001 /* EditTapperView+NameSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditTapperView+NameSection.swift"; sourceTree = "<group>"; };
+		C0D3A1082E1B000100000001 /* EditTapperView+IncrementSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditTapperView+IncrementSection.swift"; sourceTree = "<group>"; };
+		C0D3A1092E1B000100000001 /* EditTapperView+CounterValueSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditTapperView+CounterValueSection.swift"; sourceTree = "<group>"; };
+		C0D3A10A2E1B000100000001 /* EditTapperView+BackgroundColorSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditTapperView+BackgroundColorSection.swift"; sourceTree = "<group>"; };
+		C0D3A10B2E1B000100000001 /* EditTapperView+DeleteSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditTapperView+DeleteSection.swift"; sourceTree = "<group>"; };
+		C0D3A10C2E1B000100000001 /* TapperView+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TapperView+Helpers.swift"; sourceTree = "<group>"; };
+		C0D3A10D2E1B000100000001 /* TapperView+TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TapperView+TopView.swift"; sourceTree = "<group>"; };
+		C0D3A10E2E1B000100000001 /* TapperView+BottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TapperView+BottomView.swift"; sourceTree = "<group>"; };
+		C0D3A10F2E1B000100000001 /* TapperView+ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TapperView+ActionButton.swift"; sourceTree = "<group>"; };
+		C0D3A1102E1B000100000001 /* TappersListView+SortMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TappersListView+SortMode.swift"; sourceTree = "<group>"; };
+		C0D3A1112E1B000100000001 /* TappersListView+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TappersListView+Helpers.swift"; sourceTree = "<group>"; };
+		C0D3A1122E1B000100000001 /* TappersListView+TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TappersListView+TitleView.swift"; sourceTree = "<group>"; };
+		C0D3A1132E1B000100000001 /* TappersListView+ControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TappersListView+ControlsView.swift"; sourceTree = "<group>"; };
+		C0D3A1142E1B000100000001 /* TappersListView+SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TappersListView+SearchView.swift"; sourceTree = "<group>"; };
+		C0D3A1152E1B000100000001 /* TappersListView+ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TappersListView+ContentView.swift"; sourceTree = "<group>"; };
+		C0D3A1162E1B000100000001 /* SmallTapperView+TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SmallTapperView+TitleView.swift"; sourceTree = "<group>"; };
+		C0D3A1172E1B000100000001 /* SmallTapperView+ActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SmallTapperView+ActionView.swift"; sourceTree = "<group>"; };
+		C0D3A1182E1B000100000001 /* SmallTapperView+ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SmallTapperView+ActionButton.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +174,7 @@
 				49270E6C2B4C799F008A8E3F /* TapperNavigationView.swift */,
 				49270E292B48BC5B008A8E3F /* Tapper.swift */,
 				49270E592B48C498008A8E3F /* Utilities */,
+				C0D3A3002E1B000100000001 /* Components */,
 				49270E672B4C7813008A8E3F /* Features */,
 				49270E2B2B48BC5D008A8E3F /* Assets.xcassets */,
 				49270E302B48BC5D008A8E3F /* Tapper.entitlements */,
@@ -187,8 +236,14 @@
 			isa = PBXGroup;
 			children = (
 				49270E5D2B49CA2C008A8E3F /* TappersListView.swift */,
-				49270E6E2B4CD7AF008A8E3F /* TappersListView+SmallTapperView.swift */,
+				C0D3A3012E1B000100000001 /* SmallTapperView */,
 				49270E712B4CD823008A8E3F /* TappersListView+PreviewContainer.swift */,
+				C0D3A1102E1B000100000001 /* TappersListView+SortMode.swift */,
+				C0D3A1112E1B000100000001 /* TappersListView+Helpers.swift */,
+				C0D3A1122E1B000100000001 /* TappersListView+TitleView.swift */,
+				C0D3A1132E1B000100000001 /* TappersListView+ControlsView.swift */,
+				C0D3A1142E1B000100000001 /* TappersListView+SearchView.swift */,
+				C0D3A1152E1B000100000001 /* TappersListView+ContentView.swift */,
 			);
 			path = TappersListView;
 			sourceTree = "<group>";
@@ -197,6 +252,16 @@
 			isa = PBXGroup;
 			children = (
 				49270E5F2B4A2BF2008A8E3F /* EditTapperView.swift */,
+				C0D3A1022E1B000100000001 /* EditTapperView+ViewModel.swift */,
+				C0D3A1032E1B000100000001 /* EditTapperView+Validation.swift */,
+				C0D3A1042E1B000100000001 /* EditTapperView+ColorPreset.swift */,
+				C0D3A1052E1B000100000001 /* EditTapperView+Helpers.swift */,
+				C0D3A1062E1B000100000001 /* EditTapperView+PreviewCard.swift */,
+				C0D3A1072E1B000100000001 /* EditTapperView+NameSection.swift */,
+				C0D3A1082E1B000100000001 /* EditTapperView+IncrementSection.swift */,
+				C0D3A1092E1B000100000001 /* EditTapperView+CounterValueSection.swift */,
+				C0D3A10A2E1B000100000001 /* EditTapperView+BackgroundColorSection.swift */,
+				C0D3A10B2E1B000100000001 /* EditTapperView+DeleteSection.swift */,
 			);
 			path = EditTapperView;
 			sourceTree = "<group>";
@@ -205,8 +270,31 @@
 			isa = PBXGroup;
 			children = (
 				49270E272B48BC5B008A8E3F /* TapperView.swift */,
+				C0D3A10C2E1B000100000001 /* TapperView+Helpers.swift */,
+				C0D3A10D2E1B000100000001 /* TapperView+TopView.swift */,
+				C0D3A10E2E1B000100000001 /* TapperView+BottomView.swift */,
+				C0D3A10F2E1B000100000001 /* TapperView+ActionButton.swift */,
 			);
 			path = TapperView;
+			sourceTree = "<group>";
+		};
+		C0D3A3002E1B000100000001 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				C0D3A1012E1B000100000001 /* PressButtonStyle.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		C0D3A3012E1B000100000001 /* SmallTapperView */ = {
+			isa = PBXGroup;
+			children = (
+				49270E6E2B4CD7AF008A8E3F /* SmallTapperView.swift */,
+				C0D3A1162E1B000100000001 /* SmallTapperView+TitleView.swift */,
+				C0D3A1172E1B000100000001 /* SmallTapperView+ActionView.swift */,
+				C0D3A1182E1B000100000001 /* SmallTapperView+ActionButton.swift */,
+			);
+			path = SmallTapperView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -347,7 +435,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				49270E282B48BC5B008A8E3F /* TapperView.swift in Sources */,
-				49270E6F2B4CD7AF008A8E3F /* TappersListView+SmallTapperView.swift in Sources */,
+				49270E6F2B4CD7AF008A8E3F /* SmallTapperView.swift in Sources */,
 				49270E562B48C494008A8E3F /* Spacing.swift in Sources */,
 				49270E6D2B4C799F008A8E3F /* TapperNavigationView.swift in Sources */,
 				49270E2A2B48BC5B008A8E3F /* Tapper.swift in Sources */,
@@ -357,6 +445,30 @@
 				49270E5E2B49CA2C008A8E3F /* TappersListView.swift in Sources */,
 				49270E262B48BC5B008A8E3F /* TapperApp.swift in Sources */,
 				49270E722B4CD823008A8E3F /* TappersListView+PreviewContainer.swift in Sources */,
+				C0D3A2012E1B000100000001 /* PressButtonStyle.swift in Sources */,
+				C0D3A2022E1B000100000001 /* EditTapperView+ViewModel.swift in Sources */,
+				C0D3A2032E1B000100000001 /* EditTapperView+Validation.swift in Sources */,
+				C0D3A2042E1B000100000001 /* EditTapperView+ColorPreset.swift in Sources */,
+				C0D3A2052E1B000100000001 /* EditTapperView+Helpers.swift in Sources */,
+				C0D3A2062E1B000100000001 /* EditTapperView+PreviewCard.swift in Sources */,
+				C0D3A2072E1B000100000001 /* EditTapperView+NameSection.swift in Sources */,
+				C0D3A2082E1B000100000001 /* EditTapperView+IncrementSection.swift in Sources */,
+				C0D3A2092E1B000100000001 /* EditTapperView+CounterValueSection.swift in Sources */,
+				C0D3A20A2E1B000100000001 /* EditTapperView+BackgroundColorSection.swift in Sources */,
+				C0D3A20B2E1B000100000001 /* EditTapperView+DeleteSection.swift in Sources */,
+				C0D3A20C2E1B000100000001 /* TapperView+Helpers.swift in Sources */,
+				C0D3A20D2E1B000100000001 /* TapperView+TopView.swift in Sources */,
+				C0D3A20E2E1B000100000001 /* TapperView+BottomView.swift in Sources */,
+				C0D3A20F2E1B000100000001 /* TapperView+ActionButton.swift in Sources */,
+				C0D3A2102E1B000100000001 /* TappersListView+SortMode.swift in Sources */,
+				C0D3A2112E1B000100000001 /* TappersListView+Helpers.swift in Sources */,
+				C0D3A2122E1B000100000001 /* TappersListView+TitleView.swift in Sources */,
+				C0D3A2132E1B000100000001 /* TappersListView+ControlsView.swift in Sources */,
+				C0D3A2142E1B000100000001 /* TappersListView+SearchView.swift in Sources */,
+				C0D3A2152E1B000100000001 /* TappersListView+ContentView.swift in Sources */,
+				C0D3A2162E1B000100000001 /* SmallTapperView+TitleView.swift in Sources */,
+				C0D3A2172E1B000100000001 /* SmallTapperView+ActionView.swift in Sources */,
+				C0D3A2182E1B000100000001 /* SmallTapperView+ActionButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -108,6 +108,7 @@ Tapper/
 │   ├── TappersListView/         grid, search, sort, empty state
 │   ├── TapperView/              full-screen counter
 │   └── EditTapperView/          create/edit form with colour presets
+├── Components/                  UI shared across features (PressButtonStyle)
 ├── Utilities/                   Spacing, Borders, IconSize design tokens
 └── Assets.xcassets/             app icon and named colours
 ```

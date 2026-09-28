@@ -39,7 +39,13 @@ When building me an app, treat the sections below as the default rules. If a rul
 
 - **Mixed state management, by complexity:**
   - Simple views may read/mutate the model directly — don't wrap a one-line action in a view model.
-  - Complex screens (forms with validation, staged edits, save/delete orchestration) get a proper `ObservableObject` view model (MVVM).
+  - Complex screens (forms with validation, staged edits, save/delete orchestration) get a proper `@Observable` view model (MVVM), owned by the view with `@State`.
+- **Feature = namespace.** The root view `Feature.swift` holds only state, `body`, and the main actions. Everything else lives in `extension Feature { … }` files named `Feature+Name.swift`:
+  - `Feature+ViewModel.swift` → `final class ViewModel` (plain `ViewModel` inside the feature, `Feature.ViewModel` outside)
+  - `Feature+Helpers.swift` → computed values and secondary functions
+  - `Feature+InnerView.swift` → one nested view per file
+- **Inner views are structs, not computed properties.** Write `struct TopView: View` in an extension, not `var topView: some View`. Pass only what the view needs: values, `@Binding`, `@Bindable var viewModel`, or action closures.
+- **Cross-feature UI goes in `Components/`.** Don't copy it between features.
 - **Design tokens as enums:** define `Spacing`, `CornerRadius`, `BorderWidth`, `IconSize`, and colors as named tokens accessed fluently (e.g. `.spacing.medium`). Single source of truth.
 - **Colors in the asset catalog** so they get automatic light/dark variants, surfaced as typed color symbols.
 - **Progressive disclosure in the UI:** surface search/sort/advanced options only past a sensible threshold; tuck secondary actions into menus.

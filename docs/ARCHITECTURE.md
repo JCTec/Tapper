@@ -82,27 +82,75 @@ finds every place that needs updating.
 
 ## Feature layout
 
-Each screen gets a folder under `Tapper/Features/`, with supporting files
-attached to their feature via `+` file naming rather than a shared `Views/`
-dump:
+Each screen gets a folder under `Tapper/Features/`. The root SwiftUI view is
+also the namespace for everything the feature owns. Supporting types live in
+`extension Feature { … }` blocks, one per `Feature+Name.swift` file, rather
+than in a shared `Views/` dump:
+
+| File | Holds |
+| --- | --- |
+| `Feature.swift` | The root view only: stored state, `body`, the main actions, and `#Preview` |
+| `Feature+ViewModel.swift` | `extension Feature { @Observable final class ViewModel }`, when the screen needs one |
+| `Feature+Helpers.swift` | Computed values and secondary functions that support the view |
+| `Feature+InnerView.swift` | A nested `struct InnerView: View`, one per file |
+| `Feature+Name.swift` | Any other nested type (enums, value types) |
+
+Naming things inside the feature keeps them short. The view model is just
+`ViewModel` inside the feature and `EditTapperView.ViewModel` from outside, for
+example in tests. Inner views are `struct TopView: View`, never
+`var topView: some View`. They receive only what they need: plain values,
+`@Binding`s, `@Bindable var viewModel`, or action closures such as
+`onReset: () -> Void`. A nested view that grows its own subviews moves into a
+subfolder inside the feature, and its file names drop the parent's prefix. For
+example, `TappersListView.SmallTapperView` lives in
+`TappersListView/SmallTapperView/`, with `SmallTapperView+TitleView.swift`
+alongside it.
 
 ```
 Features/
 ├── TappersListView/
-│   ├── TappersListView.swift                    grid, search, sort, empty state,
-│   │                                            showcase seeding
-│   ├── TappersListView+SmallTapperView.swift    grid cell with inline +/−
-│   └── TappersListView+PreviewContainer.swift   in-memory container for #Preview
+│   ├── TappersListView.swift                         root: state, body, addTapper
+│   ├── TappersListView+Helpers.swift                 filtering/sorting, layout, showcase seeding
+│   ├── TappersListView+SortMode.swift
+│   ├── TappersListView+TitleView.swift
+│   ├── TappersListView+ControlsView.swift            sort menu + search
+│   ├── TappersListView+SearchView.swift
+│   ├── TappersListView+ContentView.swift             empty/no-match states and the grid
+│   ├── TappersListView+PreviewContainer.swift        in-memory container for #Preview
+│   └── SmallTapperView/                              grid card (TappersListView.SmallTapperView)
+│       ├── SmallTapperView.swift
+│       ├── SmallTapperView+TitleView.swift
+│       ├── SmallTapperView+ActionView.swift
+│       └── SmallTapperView+ActionButton.swift
 ├── TapperView/
-│   └── TapperView.swift                         full-screen counter, reset dialog
+│   ├── TapperView.swift                              root: state, body, counter actions
+│   ├── TapperView+Helpers.swift                      counter feedback (haptic + pulse)
+│   ├── TapperView+TopView.swift                      close / reset / edit
+│   ├── TapperView+BottomView.swift                   counter, labels, +/−
+│   └── TapperView+ActionButton.swift
 └── EditTapperView/
-    └── EditTapperView.swift                     form, validation, colour presets
+    ├── EditTapperView.swift                          root: form, toolbar, dialogs, save/delete
+    ├── EditTapperView+ViewModel.swift                draft state, validation, persistence
+    ├── EditTapperView+Validation.swift               ValidationError, ValidatedValues
+    ├── EditTapperView+ColorPreset.swift
+    ├── EditTapperView+Helpers.swift
+    ├── EditTapperView+PreviewCard.swift
+    ├── EditTapperView+NameSection.swift
+    ├── EditTapperView+IncrementSection.swift
+    ├── EditTapperView+CounterValueSection.swift
+    ├── EditTapperView+BackgroundColorSection.swift
+    └── EditTapperView+DeleteSection.swift
 ```
+
+UI shared across features lives in `Tapper/Components/`, for example
+`PressButtonStyle`.
 
 `EditTapperView` is the only screen with a view model, because it is the only
 one with state that outlives a single view update (draft values plus
 validation). Everywhere else, `@Query` and the model are enough. This is
-deliberate: MVVM is applied where it earns its keep, not uniformly.
+deliberate: MVVM is applied where it earns its keep, not uniformly. View models
+use the Observation framework (`@Observable`), and the view owns them with
+`@State`.
 
 ## Design tokens
 

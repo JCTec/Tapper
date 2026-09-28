@@ -55,8 +55,14 @@ Points worth repeating because they are easy to miss:
 1. Add a case to `TapperCoordinator` in `TapperNavigationView.swift`.
 2. Handle it in the `navigationDestination` switch — the compiler will point you
    at what is missing.
-3. Put the view in its own folder under `Tapper/Features/`, with helpers
-   attached via `+` file naming.
+3. Put the view in its own folder under `Tapper/Features/`. `Feature.swift`
+   holds only the root view. The view model goes in `Feature+ViewModel.swift`
+   (`extension Feature { @Observable final class ViewModel }`), and helpers go
+   in `Feature+Helpers.swift`. Each inner view is a nested
+   `struct InnerView: View` in `Feature+InnerView.swift`, never a
+   `var innerView: some View`. See "Feature layout" in
+   [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). The Xcode project uses
+   explicit file references, so add every new file to the `Tapper` target.
 4. Add a `#Preview` using `TappersListView+PreviewContainer.swift`'s in-memory
    container.
 
