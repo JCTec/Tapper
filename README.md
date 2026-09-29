@@ -7,7 +7,7 @@
   <img src="https://img.shields.io/badge/iOS-17.0%2B-000000?logo=apple&logoColor=white" alt="iOS 17.0+">
   <img src="https://img.shields.io/badge/Swift-5-F05138?logo=swift&logoColor=white" alt="Swift 5">
   <img src="https://img.shields.io/badge/SwiftUI%20%2B%20SwiftData-0A84FF" alt="SwiftUI + SwiftData">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue" alt="MIT License"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-CC%20BY--NC%204.0-blue" alt="CC BY-NC 4.0 License"></a>
 </p>
 
 # Tapper
@@ -131,4 +131,12 @@ Full write-up in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ## License
 
-Released under the [MIT License](LICENSE). © JCTec.
+Released under the [Creative Commons Attribution-NonCommercial 4.0
+International License](LICENSE) (CC BY-NC 4.0). © JCTec.
+
+Use, modify, and share it freely for noncommercial purposes, with credit. You
+may not sell it or ship it — or a derivative of it — as a commercial product.
+For a commercial license, get in touch.
+
+> Tapper Counters by JCTec — <https://github.com/JCTec/Tapper> — licensed under
+> [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/).

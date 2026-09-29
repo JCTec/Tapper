@@ -105,6 +105,14 @@ Do not edit it; re-copy it if it needs updating.
   be accurate, not aspirational.
 - Add a `CHANGELOG.md` entry under **Unreleased** for anything user-facing.
 
+## Licensing of contributions
+
+Tapper is licensed under [CC BY-NC 4.0](LICENSE). By opening a pull request you
+agree that your contribution is licensed under the same terms, and that you have
+the right to license it that way. Do not paste in code whose own license is
+incompatible — anything commercial-use-restricted upstream, or anything you
+cannot relicense.
+
 ## Reporting bugs
 
 Open an issue with the device, iOS version, and steps to reproduce. If it is

@@ -9,6 +9,15 @@ Entries below 1.0 are reconstructed from git history and are dated by commit.
 
 ## [Unreleased]
 
+### Changed
+
+- **License changed from MIT to
+  [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/).** The project
+  stays free to use, modify, and share for noncommercial purposes with
+  attribution; selling it, or shipping a derivative as a commercial product, is
+  no longer permitted. Copies obtained under the previous MIT `LICENSE` remain
+  MIT-licensed — relicensing is not retroactive.
+
 ### Added
 
 - fastlane automation with no App Store Connect dependency: `test`,
@@ -24,7 +33,7 @@ Entries below 1.0 are reconstructed from git history and are dated by commit.
   `app-icon.png` — produced by the same renderer as the App Store assets.
 - Documentation suite: `docs/ARCHITECTURE.md`, `docs/TESTING.md`,
   `docs/SCREENSHOTS.md`, `docs/CI.md`, `docs/APP_STORE.md`, `docs/PRIVACY.md`,
-  plus `CONTRIBUTING.md`, `CHANGELOG.md`, and an MIT `LICENSE`.
+  plus `CONTRIBUTING.md`, `CHANGELOG.md`, and a `LICENSE`.
 - App Store listing copy, which previously existed nowhere in the repository.
 - `AccentColor` colour set, resolving a build warning from
   `ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME`.
